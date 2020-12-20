@@ -23,7 +23,7 @@ using namespace std;
     anything. We will just move forward. So in this way , we will stop where p[i]=1 and then go to all its multiples 
     and make their p[i] to 0.
     
-    we will loop upto SQRT(N).
+    we will loop this way upto N.
     
     One important thing to consider here is lets say we are at 7 and p[7]=1 so we have to make its multiples to 0.But 
     by the time we reach till 7, 14,21,28,35,and 42 will already be marked with 0's since there are multiples of some
