@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+    /* suppose we are given Q queries, we have to say whether the given number in a query is either a prime or not
+    if there are large no of queries of around a million then in each case we wont loop upto sqrt(n) to find whether 
+    the given number is prime or not.
+    
+    So to overcome above problems we can apply sieve and generate all the primes from 1 to N in O(Nlog(logN)) time 
+    complexity.Thus we can answer the queries in O(1) constant time. We need extra space O(N) for storing whether a
+    number is prime or not(obtained from the sieve).
+    
+    /*we take an array of size n upto which we want to generate primes using sieve. if p[i] is 1 this means that i
+    is prime and if p[i] is 0 then this means that its not prime.
+    
+    p[i]=0 not prime
+    p[i]=1 prime
+    
+    we will now initialse the whole array with 1. since 1 is not a prime we will put p[1]=0 then after that we will
+    start the loop from 2. since p[2]=1,we will go to all the multiples of 2 and change the value to 0 since multiples 
+    of a prime number cannot be primes.we will now increment the pointer to 3. p[3]=1 and so we will again go to all 
+    the multiples of 3 and make them 0 which were initially 1. we will now move to 4. since p[4] is 0 so we dont do 
+    anything. We will just move forward. So in this way , we will stop where p[i]=1 and then go to all its multiples 
+    and make their p[i] to 0.
+    
+    we will loop upto SQRT(N).
+    
+    One important thing to consider here is lets say we are at 7 and p[7]=1 so we have to make its multiples to 0.But 
+    by the time we reach till 7, 14,21,28,35,and 42 will already be marked with 0's since there are multiples of some
+    numbers in between 1 to 6. So we have to start from 49 ie 7*7 and then continue our process. 
+    */
+    
+    
+    
+    int p[1000001];
+    
+    void sieve()
+    {
+    int maxN=1000000;
+    for(int i=0;i<=maxN;i++)
+    p[i]=1;
+    
+    p[1]=0;
+    
+    for(int i=2;i<=maxN;i++)
+    {
+    	if(p[i]==1)
+    	{
+    		for(int j=i*i;j<=maxN;j+=i)
+    		p[j]=0;
+		}
+	}
+	
+    
+}
