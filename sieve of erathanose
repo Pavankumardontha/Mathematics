@@ -23,11 +23,22 @@ using namespace std;
     anything. We will just move forward. So in this way , we will stop where p[i]=1 and then go to all its multiples 
     and make their p[i] to 0.
     
-    we will loop this way upto N.
+    we will loop this way upto sqrt(N).
     
     One important thing to consider here is lets say we are at 7 and p[7]=1 so we have to make its multiples to 0.But 
     by the time we reach till 7, 14,21,28,35,and 42 will already be marked with 0's since there are multiples of some
-    numbers in between 1 to 6. So we have to start from 49 ie 7*7 and then continue our process. 
+    numbers in between 1 to 6. So we have to start from 49 ie 7*7 and then continue our process. we will loop this untill
+    N.
+    
+    carefully note how the first and the second loop runs 
+    first loop : for(int i=2;i*i<=N;i++)  
+    second loop : for(int j=i*i;j<=N;j+=i)
+    
+    
+    
+    Time complexity : O(N*log(logN))
+    query time : O(1)
+    space compleixty : O(N)
     */
     
     
@@ -41,11 +52,11 @@ void sieve()
     
     p[1]=0;
     
-    for(int i=2;i<=maxN;i++)
+    for(int i=2;i*i<=maxN;i++)  //see this loop condition
     {
     	if(p[i]==1)
         {
-           for(int j=i*i;j<=maxN;j+=i)
+           for(int j=i*i;j<=maxN;j+=i) //see this loop condition.
     	   p[j]=0;
 	}
    }
