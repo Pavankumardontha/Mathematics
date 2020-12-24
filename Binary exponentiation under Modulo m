@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+//binary exponentiation under modulo m 
+
+int m = 1e9+7;
+
+long long int expo(long long int a,long long int n)
+{
+    long long int res = 1;
+    
+    while(n)
+    {
+        if(n%2==1)
+        {
+            res = ((res%m)*1LL*(a%m))%m;
+            n--;
+        }
+        else
+        {
+            a = ((a%m)*1LL*(a%m))%m;
+            n=n/2;
+        }
+    }
+    return res%m;
+}
+
+
+
+int main()
+{
+    long long int a;
+    long long int n;
+    cin>>a;
+    cin>>n;
+    long long int ans = expo(a,n);
+    cout<<ans<<endl;
+}
