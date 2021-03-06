@@ -6,6 +6,16 @@ using namespace std;
 
 int m = 1e9+7;
 
+/*
+Lets say we have a=2 and n=6. The naive approach is to multiply a 6 times.This takes O(n) time complexity. Lets say we have calculated a^(3).let this be equal to temp. Now our 
+final result would be result = temp*temp; 
+initially:        a = 2             n = 6      res = 1    
+loop-1(n%2=0):    a = 2*2=4         n = 3      res = 1
+loop-2(n%2=1):    a = 4             n = 2      res = res*a = 4 
+loop-3(n%2=0):    a = 4*4=16        n = 1      res = 4;
+loop-4(n%2=1):    a = 16            n = 0      res = 4*16 = 6
+
+*/
 long long int expo(long long int a,long long int n)
 {
     long long int res = 1;
