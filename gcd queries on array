@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+int gcd(int a,int b)
+{
+    if(b==0)
+    return a;
+    else
+    return gcd(b,a%b);
+}
+
+int a[100001];
+int pre[100001];
+int suf[100001];
+
+int main()
+{
+    int t;
+    cin>>t;
+    int n; //size of the array
+    int q; //no. of queries
+    int l;
+    int r;
+    //l and r are the query bounds
+    while(t--)
+    {
+        cin>>n>>q;
+        for(int i=1;i<=n;i++)
+        cin>>a[i];
+/*We have to find the gcd of the remaining array excluding the range from [l,r].We will 
+use prefix and suffix array to solve this problem.
+
+If gcd(x1,x2,..) = g1 and gcd(y1,y2,...) = g2 then gcd of the the combined set {x1,x2,...y1,y2,..} 
+is gcd(x1,x2,...,y1,y2,..) = gcd(g1,g2)
+
+so if a query (l,r) is given,we have to calculate the gcd excluding the set (l,r) so we 
+have to calculate the gcd of set {a[1],a[2],...a[l-1]} and set {a[r+1],a[r+2],...a[n]} 
+combined. We will calculate this using prefix and suffix array.
+pre[i] stores gcd of set {a[1],a[2],..a[i]} 
+suf[i] stores gcd of set {a[i],a[i+1],...a[n]}
+*/
+         pre[0]=0;
+         for(int i=1;i<=n;i++)
+         pre[i] = gcd(a[i],pre[i-1]);
+         
+         suf[n+1]=0;
+         for(int i=n;i>=1;i--)
+         suf[i]=gcd(suf[i+1],a[i]);
+         
+         for(int i=0;i<q;i++)
+         {
+             cin>>l>>r;
+             cout<<gcd(pre[l-1],suf[r+1])<<endl;
+         }
+            
+    }
+    return 0;
+}
