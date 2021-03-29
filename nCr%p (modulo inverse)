@@ -1,0 +1,70 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+int m=1e9+7;
+/* we will take two arrays here.one is to calculate the n! and other is to 
+keep the modular inverse of n!
+*/
+long long int fac[1001];
+long long int modinv[1001];
+
+//the above arrays are defined as per constraints.
+
+long long int expo(long long int a,long long int n);
+void calculate()
+{
+    //this function will calculate the modular inverse and factorials 
+    fac[0]=1;
+    fac[1]=1;
+    for(int i=2;i<=1000;i++)
+    fac[i]=((i%m)*(fac[i-1]%m))%m;
+    
+    //we will now calculate the modular inverse array
+    modinv[0]=1;
+    modinv[1]=1;
+    for(int i=2;i<=1000;i++)
+    modinv[i]=expo(fac[i],m-2);
+}
+
+long long int expo(long long int a,long long int n)
+{
+    long long int res=1;
+    while(n)
+    {
+        if(n%2==1)
+        {
+            res=((res%m)*(a%m))%m;
+            n--;
+        }
+        else
+        {
+            a=((a%m)*(a%m))%m;
+            n=n/2;
+        }
+    }
+    return res%m;
+}
+
+int main()
+ {
+	//we will calculate the fac[] and modinv array
+	calculate();
+	int t;
+	int n;
+	int r;
+	cin>>t;
+	long long int ans;
+	while(t--)
+	{
+	    cin>>n>>r;
+	    if(r>n)
+	    cout<<0<<endl;
+	    else
+	    {
+	    ans=((fac[n]%m)*(modinv[r]%m))%m;
+	    ans=((ans%m)*(modinv[n-r]%m))%m;
+	    cout<<ans%m<<endl;
+	    }
+	}
+	return 0;
+}
