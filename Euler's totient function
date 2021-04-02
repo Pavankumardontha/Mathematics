@@ -1,0 +1,32 @@
+int phi(int n) //euler's totient function 
+{
+    /* 
+    phi(n) = Euler's totient function counts the positive integers up to a given integer n that are 
+    relatively prime to n.It is the number of integers k in the range 1 ≤ k ≤ n for which the 
+    greatest common divisor gcd(n, k) is equal to 1.
+    phi(n) = N*(P1-1)*(P2-1)*(P3-1)*(P4-1)....(PN-1)/(P1*P2*P3....*PN)
+    */
+   int res = n;
+   for(int i=2;i*i<=n;i++)
+   {
+       if(n%i==0)
+       {
+           while(n%i==0)
+           n = n/i;
+           res = res*(i-1);
+           res = res/i;
+       }
+   }
+   if(n>1)
+   {
+       res = res*(n-1);
+       res = res/n;
+   }
+   return res;
+}
+
+int main()
+{
+      int k = phi(26);
+      cout<<k<<endl;
+}
